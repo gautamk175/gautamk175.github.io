@@ -17,7 +17,7 @@ title: 'Project-page : A graph construction study for graph-based semi-supervise
 email: sumedhyadav.iitkgp@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Case study keeping unstructured text data in mind. This project falls under the category of graph-based machine learning and big data.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/projects/gb_ssl" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
