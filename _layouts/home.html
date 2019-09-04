@@ -1,0 +1,130 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  <!-- {%- if page.title -%} -->
+    <h1 class="page-heading">{{ page.title }}</h1>
+  <!-- {%- endif -%} -->
+
+  <h2>In a nut-shell</h2>
+  <!-- --------- Aim, abstract (conscise description of the project) -->
+  <p>
+In this project, we present case studies of distance metrics, (standard/traditional and state-of-the-art) on unstructured data, particularly from E-commerce domain. The project focuses on graph-based semi-supervised learning (SSL) algorithms, which are traditionally popular among graph structured datasets, such as online social networks et cetera (Subramanya et al. 2014), however, researchers and practitioners are beginning to realise that graph can be used to represent data in an organic way (Wu et al. 2018). Although extensive research has been done in the classification sub-problem of the graph-based SSL techniques (Peel 2016, Talukdar et al. 2009), the graph construction sub-problem remains relatively untouched.
+Distance metric such as cosine similarity (CS) is shown to be effective for quantifying text similarity in the case of unstructured data, which can be used to construct a graph for data domains such as E-commerce (E-com.). Particularly, state-of-the-art metric inverse sqrt-cosine (ISC) similarity is shown to be effective (Sohangir et al. 2017) for text based data. We present a study on how the distance/similarity metrics impact the graph construction and the subsequent classification task in cases of unstructured text data...
+  </p>
+
+
+  <h2>Resources</h2>
+  <!-- ---------- Files et. cetera (using below template) -->
+  <p>
+   <table style="width:100%">
+    <tr>
+      <th>Material</th>
+      <th>Link</th>
+    </tr>
+    <tr>
+      <td>Poster</td>
+      <td> <a href ="assets/ODSC_poster.pdf" download="Poster.pdf"> Poster.pdf</a> </td>
+    </tr>
+    <tr>
+    <tr>
+      <td>Poster manuscript</td>
+      <td> <a href ="assets/Poster_manuscript.pdf" download="Detailed_poster.pdf"> Poster manuscript.pdf</a> </td>
+    </tr>
+    <tr>
+      <td>Handouts</td>
+      <td> <a href ="assets/Handouts.zip" download="handouts.zip"> Handouts.zip</a> </td>
+    </tr>
+    <tr>
+      <td>Codes</td>
+      <td><a href ="assets/codes.zip" download="codes.zip">Codes.zip</td>
+    </tr>
+    <tr>
+      <td>Datasets</td>
+      <td>
+        <a href="https://zenodo.org/record/3355823/"  target="_blank">  Dataset I (E-commerce text data)</a>,
+        <a href="http://qwone.com/~jason/20Newsgroups/" target="_blank"> Dataset II (20 Newsgroups)</a>
+      </td>
+    </tr>
+  </table>
+
+  </p>
+
+<!--   <table style="width:100%">
+    <tr>
+      <th>Resource</th>
+      <th>Description</th>
+      <th>Dependency</th>
+    </tr>
+    <tr>
+      <td> <a href="../assets/files/hash_key_gen.cpp"> hash_key_gen.cpp </a> </td>
+      <td>Functions for hash key generation and hash table</td>
+      <td>C++, GCC 5.4.0 compiler</td>
+    </tr>
+  </table>  -->
+
+  <h2>Findings</h2>
+  <!-- --------- Prsentation of major findings -->
+
+  SSL was applied on three distance metrics on above two mentioned datasets and result are obtained as below. For test parameters and more details refer to "Handout.pdf" in Resources section and <a href="https://medium.com/" target="_blank"> SSL blog </a>.
+
+  <!-- Promising results are obtained for both methods, and network design that accompanied the distributed implementation of GC heuristic. -->
+  
+  <!---------------------- RESULTS ----------------->
+  <div class='bbox'>
+      
+    <div class="result_half_fig">    
+      <object width="" type="image/svg+xml" data="{{ "/assets/img/Result_1.svg" | relative_url }}">
+      Your browser does not support SVG
+      </object>
+    </div>
+
+    <img src="{{ "/assets/img/Result_2.svg" | relative_url }}" width = "500" alt="Your browser does not support SVG">
+
+    <div class="result_full_desc">
+      <p>
+        From the above plot, it is evident that ISC perform the best in the graph construction quality and the subsequent classification tasks followed by CS and L2. 
+        <!-- Since message types were known for the distributed implementation of GC heuristic, we designed the network optmized for the need. One such aspect of the network was message protocols (right sub-figure). Protocol 1 which involved message marshalling was superior (left sub-figure). This optimization is analogous to dynamic programming.  -->
+      </p>
+    </div>
+
+    <div class="clearfix"></div>
+  </div>
+
+  {%- if site.posts.size > 0 -%}
+    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
+    Updates will be posted regularly. Technical details and other interesting reads shall be presented via blog-posts.  
+
+    <ul class="post-list">
+      {%- for post in site.posts -%}
+      <li>
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        <span class="post-meta">{{ post.date | date: date_format }}</span>
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+          <pre style="background-color:white;font-size:12px">{{ post.subtitle | escape }}</pre>
+        </h3>
+
+        {%- if site.show_excerpts -%}
+          {{ post.excerpt }}
+        {%- endif -%}
+      </li>
+      {%- endfor -%}
+    </ul>
+
+  {%- endif -%}
+  <footer>
+    <p> 
+      End note : This project compares the distance metrics by analysing the graph construction and label propagation in SSL.
+    </p>
+  </footer> 
+
+
+
+
+
+</div>
