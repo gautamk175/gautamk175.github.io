@@ -44,25 +44,25 @@
             For us all data scientists, the idea of reducing datapoints (or technically known as training set selection) directly opposes the machine learning (ML) principle of generalization. Surpisingly, two decades earlier, some of the most seminal scientific works were done on it [1, 2], mainly forced by the limited processing power at the time. Now that the processing power has led to the success of ML, big data has again turned the wheel in the opposite direction where we are finding it difficult to process/train the plentiful data within feasible computation resources. A very simple approach to reduce the datapoints would be to randomly select them (or technically known as simple random sampling (SRS)). But note that doing so would lead to loss in critical datapoints which otherwise may have been the support vectors (if the classification algorithm was SVM) or the final hypothesis in a general case.
         </div>
 
-        <img src="../../assets/img/Figure_1_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+        <img src="/assets/img/Figure_1_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
 
         <div class="content">
             Furthermore, balancing class sizes is important for training with many types of classification algorithms. It is a byproduct in our method, whereas SRS doesn't address it in its naive form.
         </div>
 
-        <img src="Figure_2_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+        <img src="/assets/img/Figure_2_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
 
         <div class="content">
             The following plot of prediction accuracies with training models trained after two sampling methods, reservoir sampling and SRS, and our datapoint reduction/selection method, called graph shedding heuristic (GSH) exemplifies the advantages with our method.
         </div>
 
-        <img src="Figure_2a.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+        <img src="/assets/img/Figure_2a.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
 
         <div class="content">
             With sampling methods proven ineffective, we present the technical outline of the entire procedure, which we will decipher step-by-step.
         </div>
 
-        <img src="flow_chart.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+        <img src="/assets/img/flow_chart.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
 
         <div class="content">
             <i>The procedure</i> starts with first clustering datapoints (Step 1 in the flowchart), which is done for two major reasons,
@@ -81,13 +81,13 @@
             The first consideration is important because classes tend to cluster in real data (technically called the cluster assumption or the low density separation assumption), hence we need to make sure that a situation like below doesn't happen,
         </div>
 
-        <img src="Figure_4_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+        <img src="/assets/img/Figure_4_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
 
         <div class="content">
             This situation can be addressed by exclusively searching neighbor of the opposite class, however, this might introduce artifical skewness in the procedure. For instance, below situation is likely to occur,
         </div>
 
-        <img src="Figure_5_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+        <img src="/assets/img/Figure_5_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
         
         <div class="content">
             Both situations are detailed in Part I to III of Algorithm 1 of the original scientific article, and summarized in the high-level algorithm,
@@ -141,7 +141,7 @@
         Once entire classification patterns are captured, the edges are weighed (using a novel edge weight scheme) to highlight the patterns, which can then be selectively choosen for training, leading to Step 3 or GSH,
         </div>
 
-        <img src="Figure_6.svg" alt="Italian Trulli"style=" width:800px;" class="center"> <br>
+        <img src="/assets/img/Figure_6.svg" alt="Italian Trulli"style=" width:800px;" class="center"> <br>
 
         <h2>The Findings</h2>
 
@@ -155,7 +155,7 @@
             Note that feature engieering steps are key for both data types,
         </div>
 
-        <img src="Figure_7.svg" alt="Italian Trulli"style=" width:900px;" class="center"> <br>
+        <img src="/assets/img/Figure_7.svg" alt="Italian Trulli"style=" width:900px;" class="center"> <br>
         
         <div class="content">
             For the first dataset, with CNN classifiers from Tensorflow library, clear scaling observations are evident for GSH,
