@@ -1,0 +1,247 @@
+body{
+    background: #fafafa;
+    padding: 50px;
+    font-family: 'Quicksand', sans-serif;
+}
+.navbar{
+    background: #fafafa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+    width: 100%;
+    color: #266fd6;
+    height: 70px;
+    z-index: 5;
+    /* padding: 5px 100px; */
+}
+.blog{
+    float: left;
+    /* color: #444; */
+    /* font-weight: bold; */
+    padding: 13px 40px;
+    padding-left: 10%;
+    font-size: 30px;
+}
+.right-items{
+    float: right;
+    padding-right: 60px;
+    padding-top: 25px;
+}
+.links{
+    float: right;
+    margin-right: 20px;
+}
+.container{
+    /*old*/
+    /*width:40%;*/
+    width:50%;
+    background: #fafafa;
+    padding: 50px 200px;
+    margin: auto;
+    /* margin-top:40px; */
+}
+.title{
+    /* font-family: 'Oswald', sans-serif; */
+    /* font-family: 'Merriweather', serif; */
+    /* font-family: 'Playfair Display SC', serif; */
+    font-family: 'Prata', serif;
+    font-size: 60px;
+    /*original*/
+    /*color: #444;*/
+    color: #333;
+    /* padding: 0 10%; */
+}
+.subtitle{
+    color: #666;
+    /* font-family: 'Quattrocento', serif; */
+    font-family: 'Open Sans', sans-serif;
+    /* font-style: italic; */
+    /* letter-spacing: 1.5px; */
+    font-size: 20px;
+    font-weight: lighter;
+    /* padding: 0 10%; */
+    margin-bottom: 60px;
+    
+}
+/*new*/
+.intro_content{
+    /* font-family: 'Merriweather', serif; */
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Helvetica', sans-serif; */
+    /* font-family: 'Playfair Display', serif; */
+    /* font-family: 'Quattrocento', serif; */
+    /* text-align: justify; */
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 30px;
+    padding: 0 0;
+    color: #444;
+    word-spacing: 3px;
+    line-height: 150%;
+}
+.content{
+    /* font-family: 'Merriweather', serif; */
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Helvetica', sans-serif; */
+    /* font-family: 'Playfair Display', serif; */
+    /* font-family: 'Quattrocento', serif; */
+    /* text-align: justify; */
+    font-size: 20px;
+    margin-top: 30px;
+    padding: 0 0;
+    color: #444;
+    word-spacing: 3px;
+    line-height: 150%;
+}
+.quote{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    margin-top: 30px;
+    background: #4d6d9a07;
+    margin: 30px 0;
+    color: #666;
+    word-spacing: 3px;
+    /* border-left-style: solid; */
+    padding: 70px;
+    border-left-width: 10px;
+    border-color: #728239;
+    font-style: italic;
+    line-height: 160%;
+}
+/*new*/
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+table{
+    margin: 60px 0;
+    width: 100%;
+    /*font-size: 18px;*/
+    font-size: 16px;
+    /*background: #f6f6f6;*/
+    /*background: #fafafa;*/
+    font-family: 'Open Sans', sans-serif;
+}
+th{
+    /*font-size: 19px;*/
+    font-size: 16px;
+    background: #266fd623;
+    /*color: #266fd6;*/
+    color: #266fd6e8;
+    letter-spacing: 1.5px;
+    font-weight: lighter;
+}
+/*tr{
+    line-height: 40px;
+    text-align: center;
+}*/
+tr{
+    line-height: 40px;
+    text-align: center;
+}
+tr:nth-child(even){
+    /*background:#4d6d9a0a;*/
+    background:#4d6d9a07;
+}
+td{
+    color: #444;
+    /*color: #fafafa;*/
+}
+
+.note{
+    position: relative;
+    background: #266fd636;
+    width: 100%;
+    padding: 20px 0;
+    color: #195cb9;
+    box-shadow: 0 2px 4px 0 #ccc;
+    z-index: 2;
+    margin: 20px 0;
+}
+.note i{
+    position: absolute;
+    top: 18px;
+    left:10px;
+    width: 30px;
+    letter-spacing: 1.3px;
+    font-size: 24px;
+    /* margin-top: 10px; */
+}
+.note span{
+    margin-left: 45px;
+    font-size: 18px;
+}
+pre{
+    margin: 60px 0 !important;
+}
+.code{
+    /* margin-top: 100px; */
+/*    font-size: 18px;
+    line-height: 35px;*/
+    font-size: 14px;
+    line-height: 28px;
+    margin: 40px 0;
+    /*height: 300px;*/
+    height: auto;
+    /*overflow: auto;*/
+    text-align: left;
+    /* font-family: 'Open Sans', sans-serif; */
+}
+
+.pln { color: #000 }  /* plain text */
+
+@media screen {
+  .str { color: #080 }  /* string content */
+  .kwd { color: #266fd6 }  /* a keyword */
+  .com { color: #888 !important }  /* a comment */
+  .typ { color: #606 }  /* a type name */
+  .lit { color: #066 }  /* a literal value */
+  /* punctuation, lisp open bracket, lisp close bracket */
+  .pun, .opn, .clo { color: #660 }
+  .tag { color: #008 }  /* a markup tag name */
+  .atn { color: #606 }  /* a markup attribute name */
+  .atv { color: #080 }  /* a markup attribute value */
+  .dec, .var { color: #606 }  /* a declaration; a variable name */
+  .fun { color: red }  /* a function name */
+}
+
+/* Use higher contrast and text-weight for printable form. */
+@media print, projection {
+  .str { color: #060 }
+  .kwd { color: #006; font-weight: bold }
+  .com { color: #600; font-style: italic }
+  .typ { color: #404; font-weight: bold }
+  .lit { color: #044 }
+  .pun, .opn, .clo { color: #440 }
+  .tag { color: #006; font-weight: bold }
+  .atn { color: #404 }
+  .atv { color: #060 }
+}
+
+/* Put a border around prettyprinted code snippets. */
+pre.prettyprint { padding: 2px; background: #4d6d9a0e; border: none !important }
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0 } /* IE indents via margin-left */
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L5,
+li.L6,
+li.L7,
+li.L8 { list-style-type: decimal }
+/* Alternate shading for lines */
+li.L1,
+li.L3,
+li.L5,
+li.L7,
+li.L9 { background: #4d6d9a0e !important }
+
+li.L0, li.L1, li.L2, li.L3,
+li.L5, li.L6, li.L7, li.L8 {
+  list-style-type: decimal !important;
+}
