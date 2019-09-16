@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog 1</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|Playfair+Display|Quicksand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Playfair+Display+SC|Prata" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quattrocento" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <!-- new additions -->
+    <!-- KaTeX is the only dependency -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-beta/katex.min.css" integrity="sha384-L/SNYu0HM7XECWBeshTGLluQO9uVI1tvkCtunuoUbCHHoTH76cDyXty69Bb9I0qZ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-beta/katex.min.js" integrity="sha384-ad+n9lzhJjYgO67lARKETJH6WuQVDDlRfj81AJJSswMyMkXTD49wBj5EP004WOY6" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="pseudocode.css" type="text/css">
+    <script src="pseudocode.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="blog">Blog</div>
+        <div class="right-items">
+            <div class="links">Machine Learning</div>
+            <div class="links">Web Technologies</div>
+            <div class="links">Big Data</div>
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="title">A heuristic for multiple times speed-up of model training</h1>
+        <h3 class="subtitle">13th September, 2019</h3>
+        <div class="intro_content">
+            <span
+                style="font-size: 70px; float: left; padding: 10px; padding-left: 0; margin-top: 8px;">T</span>he first question that comes to mind is HOW? The answer is simple, reduce the number of datapoints. However, a more interesting question is the way in which datapoints are reduced, which is formulated by combining ideas from various fields such as discrete mathematics, discrete optimization, and network architecture...
+        </div>
+
+        <div class="content">
+            For us all data scientists, the idea of reducing datapoints (or technically known as training set selection) directly opposes the machine learning (ML) principle of generalization. Surpisingly, two decades earlier, some of the most seminal scientific works were done on it [1, 2], mainly forced by the limited processing power at the time. Now that the processing power has led to the success of ML, big data has again turned the wheel in the opposite direction where we are finding it difficult to process/train the plentiful data within feasible computation resources. A very simple approach to reduce the datapoints would be to randomly select them (or technically known as simple random sampling (SRS)). But note that doing so would lead to loss in critical datapoints which otherwise may have been the support vectors (if the classification algorithm was SVM) or the final hypothesis in a general case.
+        </div>
+
+        <img src="Figure_1_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+
+        <div class="content">
+            Furthermore, balancing class sizes is important for training with many types of classification algorithms. It is a byproduct in our method, whereas SRS doesn't address it in its naive form.
+        </div>
+
+        <img src="Figure_2_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+
+        <div class="content">
+            The following plot of prediction accuracies with training models trained after two sampling methods, reservoir sampling and SRS, and our datapoint reduction/selection method, called graph shedding heuristic (GSH) exemplifies the advantages with our method.
+        </div>
+
+        <img src="Figure_2a.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+
+        <div class="content">
+            With sampling methods proven ineffective, we present the technical outline of the entire procedure, which we will decipher step-by-step.
+        </div>
+
+        <img src="flow_chart.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+
+        <div class="content">
+            <i>The procedure</i> starts with first clustering datapoints (Step 1 in the flowchart), which is done for two major reasons,
+            <ul>
+              <li>Big-O complexity of rest of the steps reduces from number of datapoints to number of clusters.</li>
+              <li>Selecting via clusters gives a buffer zone of few extra points, adding to the generalization of the procedure.</li>
+            </ul> 
+
+            Step 2 or graph knitting step is the most crucial, where the unique manner of reduction/selection, the one we have been evasive about, is finally unfolded.
+
+            In this step we contruct a knowledge graph of the classification patterns of data, with two key considerations,
+            <ul>
+              <li>Edges are sufficiently formed across all the classification patterns,</li>
+              <li>While controlling the skewness during the graph construction.</li>
+            </ul>
+            The first consideration is important because classes tend to cluster in real data (technically called the cluster assumption or the low density separation assumption), hence we need to make sure that a situation like below doesn't happen,
+        </div>
+
+        <img src="Figure_4_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+
+        <div class="content">
+            This situation can be addressed by exclusively searching neighbor of the opposite class, however, this might introduce artifical skewness in the procedure. For instance, below situation is likely to occur,
+        </div>
+
+        <img src="Figure_5_v2.svg" alt="Italian Trulli"style=" width:600px;" class="center"> <br>
+        
+        <div class="content">
+            Both situations are detailed in Part I to III of Algorithm 1 of the original scientific article, and summarized in the high-level algorithm,
+        </div>
+        
+        <iframe src="algo.pdf" width="1000" height="400" class="center"></iframe>
+        <!-- <embed src="algo.pdf" width="800px" height="600" />
+
+        <object data="algo.pdf" type="application/pdf" width="300" height="200">
+        <a href="algo.pdf">test.pdf</a>
+        </object> -->
+
+<!--             <pre id="test-basics" style="display:none">
+                \begin{algorithm}
+                \caption{High-level psuedocode}
+                \begin{algorithmic}
+                \INPUT $G(V,\phi,\phi)$, $nn$ - number of neighbors
+                \OUTPUT $G(V,E,W)$ \\
+
+                \STATE $search\_occurence \gets []$ \\
+                \STATE $scan\_range \gets []$
+
+                \STATE $flann() \gets V$ \\
+                \STATE $raw\_E \gets flann.ann\_search(nn) $\\
+
+                \FORALL{$i \in V$}
+                    \FORALL{$j \, \in \, raw\_E[i]$}
+                    \IF{$j \, \notin \,neighbor\,of\,i$}
+                        \STATE $E\,{+}{=}\,(i,j)$\\
+                        \STATE $W_{i,j}\,\gets \, edge\_weight(i,j)$ \\
+                        \STATE $E\,{+}{=}\,(j,i)$ \\
+                        \STATE $W_{j,i}\,\gets \,W_{i,j}$ \\
+                        \STATE $search\_occurence[j] += 1$ \\
+                        \STATE $scan\_range[i] += distance(i, j)$ \\
+                    \ENDIF
+                    \ENDFOR
+                \ENDFOR
+                \END{ALGORITHMIC}
+                \END{ALGORITHM}
+            </pre>
+
+            <script type="text/javascript">
+                var testBasics = document.getElementById("test-basics").textContent;
+                pseudocode.render(testBasics, document.body, {
+                    lineNumber: true,
+                });
+            </script> -->
+        <!-- </div> -->
+        
+        <div class="content">
+        Once entire classification patterns are captured, the edges are weighed (using a novel edge weight scheme) to highlight the patterns, which can then be selectively choosen for training, leading to Step 3 or GSH,
+        </div>
+
+        <img src="Figure_6.svg" alt="Italian Trulli"style=" width:800px;" class="center"> <br>
+
+        <h2>The Findings</h2>
+
+        <div class="content">
+            We applied Step 1 to 3 to reduce the data coming from two sources,
+            <ul>
+              <li>An unstructured text dataset, available at doi:10.5281/zenodo.3355823.</li>
+              <li>An image dataset, available at doi:10.5281/zenodo.3356917.</li>
+            </ul>
+
+            Note that feature engieering steps are key for both data types,
+        </div>
+
+        <img src="Figure_7.svg" alt="Italian Trulli"style=" width:900px;" class="center"> <br>
+        
+        <div class="content">
+            For the first dataset, with CNN classifiers from Tensorflow library, clear scaling observations are evident for GSH,
+        </div>
+
+        <table>
+        <tr>
+            <th rowspan="2"> Fraction of # datapoints </th>
+            <th rowspan="2"> # features </th>
+            <th colspan="2"> Training Time (seconds) </th>
+            <th colspan="2"> Prediction Accuracy (%)</th>
+        </tr>
+        <tr>
+            <th> Tensorflow </th>
+            <th> GSH (/times) </th>
+            <th> Tensorflow </th>
+            <th> GSH </th>
+        </tr>
+        <tr>
+            <td> 0.2 </td>
+            <td> 10621 </td>
+            <td> 2603.82 </td>
+            <td> 1201.11 / 2.2 </td>
+            <td> 98.54 </td>
+            <td> 98.45 </td>
+        </tr>
+        <tr>
+            <td> 0.5 </td>
+            <td> 15613 </td>
+            <td> 11851.98 </td>
+            <td> 1664.38 / 7.1 </td>
+            <td> 99.13 </td>
+            <td> 99.13 </td>
+        </tr>
+        </table>
+
+        <div class="content">
+            For SMO implementation of SVM from LIBSVM library, similar scaling observation with slight improvement in prediction accuracy is observed,
+        </div>
+
+        <table>
+        <tr>
+            <th rowspan="2"> word2vec input dimension </th>
+            <th colspan="2"> Training Time (seconds) </th>
+            <th colspan="2"> Prediction Accuracy (%)</th>
+        </tr>
+        <tr>
+            <th> LIBSVM </th>
+            <th> GSH (/times) </th>
+            <th> LIBSVM </th>
+            <th> GSH </th>
+        </tr>
+        <tr>
+            <td> 500 </td>
+            <td> 100.88 </td>
+            <td> 12.06 / 8.3 </td>
+            <td> 98.04 </td>
+            <td> 98.79 </td>
+        </tr>
+        <tr>
+            <td> 1000 </td>
+            <td> 201.33 </td>
+            <td> 21.64 / 9.3 </td>
+            <td> 98.12 </td>
+            <td> 98.91 </td>
+        </tr>
+        </table>        
+
+        <div class="content">
+        For the second dataset, with VGG'16 feature generator coupled with LIBSVM classifier, clear scaling observations are evident,
+        </div>
+
+        <table>
+        <tr>
+            <th rowspan="2"> # features </th>
+            <th colspan="2"> Training Time (seconds) </th>
+            <th colspan="2"> Prediction Accuracy (%)</th>
+        </tr>
+        <tr>
+            <th> LIBSVM </th>
+            <th> GSH (/times) </th>
+            <th> LIBSVM </th>
+            <th> GSH </th>
+        </tr>
+        <tr>
+            <td> 25088 </td>
+            <td> 328.39 </td>
+            <td> 70.51 / 4.7 </td>
+            <td> 99.16 </td>
+            <td> 99.16 </td>
+        </tr>
+        </table> 
+
+        <div class="content">
+            Until now, we have applied graph algorithms to gain speed-ups of ~10 times, however, upon application of the remaining aforementioned fields, that is discrete optimization and network architecture, speed-ups of ~40 times are observed. This is the topic of the concluding post in this two-part blog series.
+
+            Details on algorithms, edge weight scheme, test set-ups et. cetera can be found in the preprint of the work, available at (https://arxiv.org/abs/1907.10421). Programming codes are available at (www.gstech.xyz/projects/gr_heu).
+        </div>
+
+        <h2>References</h2>
+        <div class="content">
+            <ol>
+              <li>Levy AY, Fikes RE, Sagiv Y (1997) Speeding up inferences using relevance reasoning: A formalism and algorithms. Artif. Intell. 97:83-136. doi:10.1016/S0004-3702(97)00049-0.</li>
+              <li>Blum AL, Langley P (1997) Selection of relevant features and examples in machine learning. Artif. Intell. 97:245-271. doi:0.1016/S0004-3702(97)00063-5.</li>
+              <li>Chang CC, Lin CJ (2011) LIBSVM: A Library for support vector machines. ACM Trans. Intell. Syst. Technol. 2:27:1-27:27. doi:10.1145/1961189.1961199.</li>
+              <li>Muja M, Lowe DG (2014) Scalable nearest neighbor algorithms for high dimensional data. IEEE Transactions on Pattern Analysis and Machine Intelligence 36:2227-2240. doi:10.1109/TPAMI.2014.2321376.</li>
+              <li>Fran\c{c}ois C and others (2015) Keras. https://keras.io. Accessed on 27 July 2019.</li>
+              <li>Abadi M and others (2015) TensorFlow: Large-scale machine learning on heterogeneous systems. https://www.tensorflow.org/. Accessed on 27 July 2019.</li>
+            </ol>
+        </div>
+
+        <br><br>
+        <img src="Short_bio.svg" alt="Italian Trulli"style=" width:700px;" class="center"> <br>
+
+    </div>
+</body>
+
+</html>
